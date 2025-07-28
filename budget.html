@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Husholdningsbudget</title>
+    
+    <!-- PWA Meta tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Hold styr på jeres husholdningsbudget">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiSHVzaG9sZG5pbmdzYnVkZ2V0Iiwic2hvcnRfbmFtZSI6IkJ1ZGdldCIsImRlc2NyaXB0aW9uIjoiSG9sZCBzdHlyIHDDpSBqZXJlcyBodXNob2xkbmluZ3NidWRnZXQiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmNWY3ZmEiLCJ0aGVtZV9jb2xvciI6IiM2NjdlZWEiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRreUlpQm9aV2xuYUhROUlqRTVNaUlnZG1sbGQwSnZlRDBpTUNBd0lERTVNaUF4T1RJaUlHWnBiR3c5SWlNMk5qZGxaV0VpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrUEhKbFkzUWdlRDBpTVRZaUlIazlJakUySWlCM2FXUjBhRDBpTVRZd0lpQm9aV2xuYUhROUlqRTJNQ0lnY25nOUlqRXdJaUJtYVd4c1BTSWpNakEwTnpnMUlpOCtQSFJsZUhRZ2VEMGlPVFlpSUhrOUlqZzRJaUIwWlhoMExXRnVZMmh2Y2owaWJXbGtaR3hsSWlCbWIyNTBMWE5wZW1VOUlqSXdJaUJtYVd4c1BTSWpabVptWm1abUlpNDhMM1JsZUhRK1BIUmxlSFFnZUQwaU9UWWlJSGs5SWpFd09TSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0lnWm05dWRDMXphWHBsUFNJeE5pSWdabWxzYkQwaVkySXpaalkxTVNoeU1URTFNemtwSWo0OEwzUmxlSFErUEhSbGVIUWdlRDBpT1RZaUlIazlJakV6TUNJZ2RHVjRkQzFoYm1Ob2IzSTlJbTFwWkdSc1pTSWdabTl1ZEMxemFYcGxQU0l4TWlJZ1ptbHNiRDBpSTJabVptWm1aaUkrTWpBME56ZzFJRzV5UEM5MFpYaDBQand2YzNablBnPT0iLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9LHsic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTlRFeUlpQm9aV2xuYUhROUlqVXhNaUlnZG1sbGQwSnZlRDBpTUNBd0lEVXhNaUExTVRJaUlHWnBiR3c5SWlNMk5qZGxaV0VpSUhodGJHNXpQU0pvZEhSd09pOHZkM2QzTG5jekxtOXlaeTh5TURBd0wzTjJaeUkrUEhKbFkzUWdlRDBpTkRBaUlIazlJalEwSWlCM2FXUjBhRDBpTkRNeUlpQm9aV2xuYUhROUlqUXpNaUlnY25nOUlqSTNJaUJtYVd4c1BTSWpNakEwTnpnMUlpOCtQSFJsZUhRZ2VEMGlNalUySWlCNVBTSXlNelVpSUhSbGVIUXRZVzVqYUc5eVBTSnRhV1JrYkdVaUlHWnZiblF0YzJsNlpUMGlOVElpSUdacGJHdzlJaU5tWm1abVptWWlQajB4TGpZZ1QzSmtZWGszWEM5MFpYaDBQand2YzNablBnPT0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    
+    <!-- Apple specific -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Budget">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9IiM2NjdlZWEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMTYiIHk9IjE2IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgcng9IjEwIiBmaWxsPSIjMjA0Nzg1Ii8+PHRleHQgeD0iOTYiIHk9Ijg4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjIwIiBmaWxsPSIjZmZmZmZmIj48L3RleHQ+PHRleHQgeD0iOTYiIHk9IjEwOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNiIgZmlsbD0iY2IzZjUxKHIxMTUzOSkiPjwvdGV4dD48dGV4dCB4PSI5NiIgeT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIiBmaWxsPSIjZmZmZmZmIj4yMDQ3ODUgbnI8L3RleHQ+PC9zdmc+">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .header p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .budget-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .budget-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .budget-card h3 {
+            margin: 0 0 8px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .remaining {
+            color: #27ae60;
+        }
+        
+        .spent {
+            color: #e74c3c;
+        }
+        
+        .input-section {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .input-section h3 {
+            margin: 0 0 15px 0;
+            font-size: 18px;
+        }
+        
+        .input-grid {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .full-width {
+            grid-column: span 2;
+        }
+        
+        input, select {
+            padding: 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        button:hover, button:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .transactions-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .transactions-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 500;
+        }
+        
+        .transaction-item {
+            padding: 15px;
+            border-bottom: 1px solid #e0e6ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-info {
+            flex: 1;
+        }
+        
+        .transaction-date {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        
+        .transaction-person {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .transaction-description {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .transaction-amount {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-right: 10px;
+        }
+        
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .month-controls {
+            text-align: center;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .month-controls button {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        .month-title {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 500;
+            min-width: 150px;
+        }
+        
+        .overfoerelse {
+            background: #f8f9fa;
+            border: 2px dashed #667eea;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #667eea;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+            font-style: italic;
+        }
+        
+        .install-prompt {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .install-prompt button {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .budget-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .amount {
+                font-size: 16px;
+            }
+            
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Install prompt -->
+        <div id="installPrompt" class="install-prompt">
+            <span>📱 Installer appen på din telefon</span>
+            <button onclick="installApp()">Installer</button>
+        </div>
+
+        <div class="header">
+            <h1>🏠 Husholdningsbudget</h1>
+            <p>Hold styr på jeres månedlige indkøb og budget</p>
+        </div>
+
+        <div class="month-controls">
+            <button onclick="changeMonth(-1)">← Forrige</button>
+            <span class="month-title" id="currentMonth"></span>
+            <button onclick="changeMonth(1)">Næste →</button>
+        </div>
+
+        <div id="overfoerelseInfo" class="overfoerelse" style="display: none;"></div>
+
+        <div class="budget-overview">
+            <div class="budget-card">
+                <h3>Månedligt budget</h3>
+                <div class="amount">8.000 kr</div>
+            </div>
+            <div class="budget-card">
+                <h3>Brugt i alt</h3>
+                <div class="amount spent" id="totalSpent">0 kr</div>
+            </div>
+            <div class="budget-card">
+                <h3>Tilbage</h3>
+                <div class="amount remaining" id="remaining">8.000 kr</div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <h3>Tilføj nyt indkøb</h3>
+            <div class="input-grid">
+                <div class="input-row">
+                    <input type="date" id="dateInput" required>
+                    <select id="personSelect" required>
+                        <option value="">Vælg person</option>
+                        <option value="Person 1">Person 1</option>
+                        <option value="Person 2">Person 2</option>
+                    </select>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="amountInput" placeholder="Beløb (kr)" required min="0" step="0.01">
+                    <button onclick="addTransaction()">Tilføj</button>
+                </div>
+                <input type="text" id="descriptionInput" placeholder="Beskrivelse (valgfri)" class="full-width">
+            </div>
+        </div>
+
+        <div class="transactions-section">
+            <div class="transactions-header">
+                Indkøb denne måned
+            </div>
+            <div id="transactionsList">
+                <div class="empty-state">Ingen indkøb registreret denne måned</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let transactions = {};
+        const monthlyBudget = 8000;
+        let deferredPrompt;
+
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:application/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdidWRnZXQtdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsKICAnLi8nCl07CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2luc3RhbGwnLCAoZXZlbnQpID0+IHsKICBldmVudC53YWl0VW50aWwoCiAgICBjYWNoZXMub3BlbihDQUNIRV9OQU1FKQogICAgICAudGhlbigoY2FjaGUpID0+IGNhY2hlLmFkZEFsbCh1cmxzVG9DYWNoZSkpCiAgKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgKGV2ZW50KSA9PiB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4oKHJlc3BvbnNlKSA9PiB7CiAgICAgICAgaWYgKHJlc3BvbnNlKSB7CiAgICAgICAgICByZXR1cm4gcmVzcG9uc2U7CiAgICAgICAgfQogICAgICAgIHJldHVybiBmZXRjaChldmVudC5yZXF1ZXN0KTsKICAgICAgfSkKICApOwp9KTs=')
+                .then(() => console.log('Service Worker registered'))
+                .catch(() => console.log('Service Worker registration failed'));
+            });
+        }
+
+        // PWA install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'flex';
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                    document.getElementById('installPrompt').style.display = 'none';
+                });
+            }
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('budgetTransactions');
+            if (savedData) {
+                transactions = JSON.parse(savedData);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('budgetTransactions', JSON.stringify(transactions));
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('dateInput').valueAsDate = new Date();
+            loadData();
+            updateMonth();
+            loadTransactions();
+            updateTotals();
+        });
+
+        function getCurrentMonthKey() {
+            return `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`;
+        }
+
+        function changeMonth(direction) {
+            currentDate.setMonth(currentDate.getMonth() + direction);
+            updateMonth();
+            loadTransactions();
+            updateTotals();
+        }
+
+        function updateMonth() {
+            const monthNames = [
+                'Januar', 'Februar', 'Marts', 'April', 'Maj', 'Juni',
+                'Juli', 'August', 'September', 'Oktober', 'November', 'December'
+            ];
+            
+            const monthName = monthNames[currentDate.getMonth()];
+            const year = currentDate.getFullYear();
+            
+            document.getElementById('currentMonth').textContent = `${monthName} ${year}`;
+            
+            // Show transfer info if relevant
+            const prevMonth = new Date(currentDate);
+            prevMonth.setMonth(prevMonth.getMonth() - 1);
+            const prevMonthKey = `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}`;
+            
+            const overfoerelseDiv = document.getElementById('overfoerelseInfo');
+            if (transactions[prevMonthKey]) {
+                const prevTotal = transactions[prevMonthKey].reduce((sum, t) => sum + t.amount, 0);
+                const prevRemaining = monthlyBudget - prevTotal;
+                
+                if (prevRemaining > 0) {
+                    overfoerelseDiv.textContent = `💰 Overført fra forrige måned: ${prevRemaining.toFixed(2)} kr`;
+                    overfoerelseDiv.style.display = 'block';
+                } else {
+                    overfoerelseDiv.style.display = 'none';
+                }
+            } else {
+                overfoerelseDiv.style.display = 'none';
+            }
+        }
+
+        function addTransaction() {
+            const date = document.getElementById('dateInput').value;
+            const person = document.getElementById('personSelect').value;
+            const amount = parseFloat(document.getElementById('amountInput').value);
+            const description = document.getElementById('descriptionInput').value;
+
+            if (!date || !person || !amount || amount <= 0) {
+                alert('Udfyld venligst alle påkrævede felter med gyldige værdier');
+                return;
+            }
+
+            const monthKey = getCurrentMonthKey();
+            if (!transactions[monthKey]) {
+                transactions[monthKey] = [];
+            }
+
+            const transaction = {
+                id: Date.now(),
+                date: date,
+                person: person,
+                amount: amount,
+                description: description
+            };
+
+            transactions[monthKey].push(transaction);
+            saveData();
+            
+            // Clear input fields
+            document.getElementById('amountInput').value = '';
+            document.getElementById('descriptionInput').value = '';
+            
+            loadTransactions();
+            updateTotals();
+        }
+
+        function deleteTransaction(id) {
+            const monthKey = getCurrentMonthKey();
+            if (transactions[monthKey]) {
+                transactions[monthKey] = transactions[monthKey].filter(t => t.id !== id);
+                saveData();
+                loadTransactions();
+                updateTotals();
+            }
+        }
+
+        function loadTransactions() {
+            const monthKey = getCurrentMonthKey();
+            const transactionsList = document.getElementById('transactionsList');
+            
+            if (!transactions[monthKey] || transactions[monthKey].length === 0) {
+                transactionsList.innerHTML = '<div class="empty-state">Ingen indkøb registreret denne måned</div>';
+                return;
+            }
+
+            // Sort transactions by date (newest first)
+            const sortedTransactions = [...transactions[monthKey]].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            transactionsList.innerHTML = '';
+            sortedTransactions.forEach(transaction => {
+                const date = new Date(transaction.date);
+                const formatDate = date.toLocaleDateString('da-DK');
+                
+                const transactionDiv = document.createElement('div');
+                transactionDiv.className = 'transaction-item';
+                transactionDiv.innerHTML = `
+                    <div class="transaction-info">
+                        <div class="transaction-date">${formatDate}</div>
+                        <div class="transaction-person">${transaction.person}</div>
+                        <div class="transaction-description">${transaction.description || ''}</div>
+                    </div>
+                    <div class="transaction-amount">${transaction.amount.toFixed(2)} kr</div>
+                    <button class="delete-btn" onclick="deleteTransaction(${transaction.id})">Slet</button>
+                `;
+                transactionsList.appendChild(transactionDiv);
+            });
+        }
+
+        function updateTotals() {
+            const monthKey = getCurrentMonthKey();
+            let totalSpent = 0;
+            
+            if (transactions[monthKey]) {
+                totalSpent = transactions[monthKey].reduce((sum, transaction) => sum + transaction.amount, 0);
+            }
+
+            // Calculate carried over amount from previous month
+            const prevMonth = new Date(currentDate);
+            prevMonth.setMonth(prevMonth.getMonth() - 1);
+            const prevMonthKey = `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}`;
+            
+            let carryOver = 0;
+            if (transactions[prevMonthKey]) {
+                const prevTotal = transactions[prevMonthKey].reduce((sum, t) => sum + t.amount, 0);
+                const prevRemaining = monthlyBudget - prevTotal;
+                if (prevRemaining > 0) {
+                    carryOver = prevRemaining;
+                }
+            }
+
+            const totalBudget = monthlyBudget + carryOver;
+            const remaining = totalBudget - totalSpent;
+
+            document.getElementById('totalSpent').textContent = `${totalSpent.toFixed(2)} kr`;
+            document.getElementById('remaining').textContent = `${remaining.toFixed(2)} kr`;
+            
+            // Change color based on remaining amount
+            const remainingElement = document.getElementById('remaining');
+            if (remaining < 0) {
+                remainingElement.className = 'amount spent';
+            } else {
+                remainingElement.className = 'amount remaining';
+            }
+        }
+    </script>
+</body>
+</html>
